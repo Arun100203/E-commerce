@@ -1,0 +1,12 @@
+<div class="container">
+    <h1>Accounts</h1>
+
+    <p> Account No: <%= @account.account_no %></p>
+    <p> IFSC: <%= @account.ifsc %></p>
+    <p> Bank Name: <%= @account.bank_name %></p>
+
+
+    <%= button_to 'Edit', "/accounts/#{@account.id}/edit", method: :get, class: "btn btn-success"  %>
+    <%= button_to 'Delete', account_path(@account.id), method: :delete, class: "btn btn-danger"  %>
+
+</div>

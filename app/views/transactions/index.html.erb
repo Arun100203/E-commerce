@@ -1,0 +1,40 @@
+<div class="container">
+    <h1> Previous Transactions </h1>
+    <br>
+    <br>
+    <div class="product-cards">
+        <div class="container">
+            <% if customerinfo_signed_in? %>
+                <ul>
+                    <% transactions = Transaction.where(customerinfo_id: current_customerinfo.id)%>
+                    <% if transactions.empty? %>
+                        <div class="alert alert-warning" role="alert">
+                                You Did not have Previous Transaction. 
+                        </div>
+                    <% else %>
+                    <div class="row">
+                        <% transactions.each_with_index do |transaction, index| %>
+                            <div class="col-md-3 mb-4">
+                                <div class="container">
+                                    <h3> <strong> Transaction <%= index + 1 %> </strong> </h3>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><%= transaction.product.name %></h5>
+                                            <p class="card-text">Price: <%= transaction.product.price %></p>
+                                            <p class="card-text">Seller name: <%= Customerinfo.find(transaction.seller_id).name %></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+                    <% end %>
+                </ul>
+            <% else %>
+                <div class="alert alert-warning" role="alert">
+                    You need to sign in to see your transaction history
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

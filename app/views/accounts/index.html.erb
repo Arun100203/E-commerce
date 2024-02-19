@@ -1,0 +1,40 @@
+<div class="container">
+    <h1 class="text-success"> <%= notice %> </h1>
+
+<h1> Accounts </h1>
+<br>
+<%= form_for :account do |form| %>
+  <%= form.label :Account_no %>
+  <%= form.text_field :account_no, class: "form-control" %>
+    <br>
+  <%= form.label :ifsc %>
+  <%= form.text_field :ifsc, class: "form-control" %>
+    <br>
+  <%= form.label :bank_name %>
+  <%= form.text_field :bank_name, class: "form-control" %>
+<br>
+    <!-- change in future into current_customer -->
+  <%= form.hidden_field :customerinfo_id, value: current_customerinfo.id%>
+    <br>
+  <%= form.submit 'Create Account' %>
+<% end %>
+<br>
+
+  <h1> All your accounts </h1>
+  <br>
+  <% Account.where(customerinfo_id: current_customerinfo.id).each do |a|%>
+    <div class="flex">
+      <div>
+        <p> Account No: <%= a.account_no %></p>
+        <p> IFSC: <%= a.ifsc %></p>
+        <p> Bank Name: <%= a.bank_name %></p>
+
+      </div>
+      <div>
+        <%= link_to 'Show', account_path(a.id), class: "btn btn-warning" %>
+        <br><br>
+      </div>
+    </div>
+    <% end %>
+</div>
+</div>

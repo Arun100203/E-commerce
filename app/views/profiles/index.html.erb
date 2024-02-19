@@ -1,0 +1,53 @@
+
+
+<div class="container">
+  <div class="flex no-wrap">
+    <h1 class="text-success"> <%= notice %> </h1>
+    <br>
+    <%= button_to "Accounts", accounts_path, method: :get, class: "btn btn-warning" %> 
+    <br>
+    <h1> Hey <%= current_customerinfo.name %>  </h1>
+    
+<br>
+<%= form_for :address do |form| %>
+  <%= form.label :door_no %>
+  <%= form.text_field :door_no, class: "form-control" %>
+<br>
+
+  <%= form.label :street %>
+  <%= form.text_field :street, class: "form-control" %>
+<br>
+  <%= form.label :state %>
+  <%= form.text_field :state, class: "form-control" %>
+<br>
+  <%= form.label :country %>
+  <%= form.text_field :country, class: "form-control" %>
+<br>
+  <%= form.label :pincode %>
+  <%= form.number_field :pincode, class: "form-control" %>
+
+  <%= form.hidden_field :customerinfo_id, value: current_customerinfo.id %>
+<br>
+  <%= form.submit 'Create Address' %>
+<% end %>
+</div>
+<br>
+  <h1> All your addresses </h1>
+  <br>
+  <% Address.where(customerinfo_id: current_customerinfo.id).each do |a|%>
+    <div class="flex">
+      <div>
+        <p>Door No: <%= a.door_no %></p>
+        <p>Street: <%= a.street %></p>
+        <p>State: <%= a.state %></p>
+        <p>Country: <%= a.country %></p>
+        <p>Pincode: <%= a.pincode %></p>
+      </div>
+      <div>
+        <%= link_to 'Show', profile_path(a.id), class: "btn btn-warning" %>
+        <br><br>
+      </div>
+
+    </div>
+    <% end %>
+</div>

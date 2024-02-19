@@ -1,0 +1,2 @@
+class SellingController < ApplicationController
+end

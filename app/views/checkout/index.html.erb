@@ -1,0 +1,106 @@
+
+<style>
+    #showAlert{
+        width: 100%;
+    }
+</style>
+<br>
+
+
+<div class="container">
+    <div class="alert alert-success fade" id="customAlert" role="alert">
+        
+    </div>
+    <h1> Checkout Page </h1>
+    <br>
+    <% if notice.present? %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <%= notice %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <% end %>
+
+    <% product = @product %>
+    
+    <% if product.nil? %>
+        <h4> <strong> Product not found!!!... </strong> </h4>
+    <% else %>
+   
+        <h3> <strong> Final step for checkout </strong> </h3>
+        <p> Fill your Location details and place your order </p>
+        <%= button_to 'Fill Location Details', profiles_path, method: :get, class: "btn btn-secondary"%>
+        <br>
+        <br>
+        <p> Fill your Accoutn details and place your order </p>
+        <%= button_to 'Fill Account Details', accounts_path, method: :get, class: "btn btn-secondary"%>
+        <br>
+        <br>
+        <h3> <strong> Order Summary </strong> </h3>
+        
+        
+
+        
+        <br>
+        <h4> <strong> product details </strong> </h4>
+        <br>
+        <p> <strong> Product Name:</strong> <%= product.name %>  </p>
+        <p> <strong> Product Price: </strong> $ <%= product.price %> </p>
+        <p> <strong> Product Quantity: </strong> <%= product.total_stock_amount %> </p>
+        <p> <strong> Product Description: </strong> <%= product.description %> </p>
+        <br>
+        <h4> <strong> Customer details </strong> </h4>
+        <br>
+        <p> <strong> Customer Name: </strong> <%= current_customerinfo.name %> </p>
+        <p> <strong> Customer Email: </strong> <%= current_customerinfo.email %> </p>
+        <br>
+        <h4> <strong> Address details </strong> </h4>
+        <% unless @address.nil? %>
+        <br>
+        <p> <strong> Address: </strong> <%= @address.door_no %> , <%= @address.street %> , <%= @address.state %> , <%= @address.country %> , <%= @address.pincode %> </p>
+        <br>
+        <% else %>
+        <P> You need to fill your @address details </P>
+        <% end %>
+
+        <h4> <strong> Account details </strong> </h4>
+        <br>
+        <% unless @account.nil? %>
+        <p> <strong> Account No: </strong> <%= @account.account_no %> </p>
+        <p> <strong> IFSC: </strong> <%= @account.ifsc %> </p>
+        <p> <strong> Bank Name: </strong> <%= @account.bank_name %> </p>
+        <br> 
+        <% else %>
+        <P> You need to fill your account details </P>
+        <% end %>  
+        
+        
+        <h3> <strong> Total Amount: </strong> $ <%= product.price %> </h3>
+        <br>
+        <br>
+
+        <% if @account.nil? || @address.nil? %>
+            <h4> <strong> You need to fill Address details and Accounts details!!!... </strong> </h4>
+        <% else %>
+            <%# <button type="button" class="btn btn-warning" id="showAlert"> %>
+                    <%= button_to "Buy now", buy_checkout_path(product), method: :post, class: "btn btn-warning" %>
+            <%# </button> %>
+        <% end %>
+    <% end %>
+    <script>
+    document.getElementById('showAlert').addEventListener('click', function() {
+        var alertMessage = 'Your Order Placed Successfully!!!...';
+
+        // Show the alert
+        var alertContainer = document.getElementById('customAlert');
+        alertContainer.innerHTML = alertMessage;
+        alertContainer.classList.add('show');
+
+        // Automatically hide the alert after 5 seconds
+        setTimeout(function() {
+        alertContainer.classList.remove('show');
+        }, 5000);
+    });
+    </script>
+</div>

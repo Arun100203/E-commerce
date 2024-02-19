@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  isLiked: false
+  likeable_id: 1
+  likeable_type: MyString
+  Customer: one
+
+two:
+  isLiked: false
+  likeable_id: 1
+  likeable_type: MyString
+  Customer: two

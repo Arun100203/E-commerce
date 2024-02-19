@@ -1,0 +1,53 @@
+<div class="container">
+  <br>
+  <%= form_with(model: @product, local: true, html: { multipart: true }, method: :post) do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control"%>
+  </div>
+  <br>
+  <div>
+    <%= form.label :description %>
+    <br>
+    <%= form.text_area :description %>
+  </div>
+  <br>
+  <div>
+    <%= form.label :brand %>
+    <%= form.text_field :brand, class: "form-control" %>
+  </div>
+  <br>
+  <div>
+    <%= form.label :price %>
+    <%= form.text_field :price, class: "form-control" %>
+  </div>
+  <br>
+  <div>
+    <%= form.label :total_stock_amount %>
+    <%= form.number_field :total_stock_amount, class: "form-control" %>
+  </div>
+  <br>
+  <div>
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+  </div>
+  <br>
+  <div class="field">
+    <%= form.label :category_id %>
+    <%= form.collection_select(:category_id, Category.all, :id, :category, prompt: 'Select a Category') %>
+  </div>
+  <br>
+  <div class="field">
+    <%= form.label :type_id %>
+    <%= form.collection_select(:type_id, Type.all, :id, :typeinfo, prompt: 'Select a Type') %>
+  </div>
+
+  <div>
+    <%= form.hidden_field :seller_id, value: current_customerinfo.id %>
+  </div>
+  <br><br>
+  <div>
+    <%= form.submit 'Create Product' %>
+  </div>
+<% end %>
+</div>

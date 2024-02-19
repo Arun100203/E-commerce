@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="flex no-wrap">
+    <h1> Edit Address </h1>
+    <br>
+    <h1> Hey <%= current_customerinfo.name %> </h1>
+    
+<%= form_for :address, url: profile_path(id: params[:id]), method: :patch do |form| %>
+
+  <%= form.label :door_no %>
+  <%= form.text_field :door_no, class: "form-control" %>
+<br><br>
+  <%= form.label :street %>
+  <%= form.text_field :street, class: "form-control" %>
+<br><br>
+  <%= form.label :state %>
+  <%= form.text_field :state, class: "form-control" %>
+<br><br>
+  <%= form.label :country %>
+  <%= form.text_field :country, class: "form-control" %>
+<br><br>
+  <%= form.label :pincode %>
+  <%= form.number_field :pincode, class: "form-control" %>
+<br><br>
+  <%= form.submit 'Update Address' %>
+<% end %>
+</div>
+</div>

@@ -1,0 +1,63 @@
+<style>
+  .product-cards {
+   padding-top:40px;
+  }
+</style>
+
+
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <%= image_tag(asset_path("carsoul_1.jpg"), alt: "Example Image", class: "d-block w-100 h-20") %>
+    </div>
+    <div class="carousel-item">
+      <%= image_tag(asset_path("carsoul_3.jpg"), alt: "Example Image", class: "d-block w-100 h-20") %>
+    </div>
+    <div class="carousel-item">
+      <%= image_tag(asset_path("carsoul_2.jpg"), alt: "Example Image", class: "d-block w-100 h-20") %>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="product-cards">
+<div class="container">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<% if customerinfo_signed_in? %>
+  <h3> <%= "Welcome #{current_customerinfo.name}!"%> </h3>
+<% end %>
+<br>
+<% if notice.present? %>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <%= notice %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% end %>
+
+  <div class="row">
+    <% @products.each do |product| %>
+    
+    <div class="col-md-3 mb-4">
+      <button class="container">
+      <%= link_to  product do %>
+      <%= render product%>
+      <% end %>
+      </button>
+      <br>
+      <br>
+      <br>
+    </div>
+      
+    <% end %>
+  </div>
+</div>
+
+
+
+</div>

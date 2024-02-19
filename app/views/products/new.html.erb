@@ -1,0 +1,18 @@
+<div class="container">
+
+    <br>
+    <% unless alert.nil? %>
+    <strong> <h3 class="text-danger"> Product details can not be blank please fill the form properly </h3> </strong>
+        <% alert.each do |e| %>
+
+        <h3 class="text-danger"> <li class="text-danger"> <%= e %> </li></h3> 
+        <% end %>
+    <% end %>
+
+
+    <%= render "form", get: @product%>
+
+    <br>
+
+    <%= link_to "back to products", products_path%>
+</div>

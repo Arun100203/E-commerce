@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hey <%= @customerinfo.name %>, Welcome to our platform</h1>
+    <p>
+      You have successfully Purchaesd the product from Online Shopping Platform. 
+    </p>
+    <p>
+      Thanl you for your purchase. Your order will be delivered to your address soon.
+      You can see your order from the link: <%= @url %>.
+    </p>
+    <h3> Order Details </h3>
+    <p> Product name : <%= @product.name %> </p>
+    <p> Product description : <%= @product.description %> </p>
+    <p> Product brand : <%= @product.brand %> </p>
+    <p> Product price : <%= @product.description %> </p>
+    <p> Product Seller : <%= Customerinfo.find(@product.seller_id).name %> </p>
+    <p> Product category : <%= Category.find(@product.category_id).category %> </p>
+    <p> Product type : <%= Type.find(@product.type_id).typeinfo %> </p>
+
+    <p>Your Ordre is on the way, Thanks for choosing our platform and have a great day!</p>
+    <br>
+    <strong>
+        <p>Thanks and Regards,</p>
+        <p>Distribution Team of Online Shopping Platform</p>
+    </strong>
+  </body>
+</html>

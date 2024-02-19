@@ -1,0 +1,14 @@
+<div class="container">
+    <h1>Address</h1>
+
+    <p>Door No: <%= @address.door_no %></p>
+    <p>Street: <%= @address.street %></p>
+    <p>State: <%= @address.state %></p>
+    <p>Country: <%= @address.country %></p>
+    <p>Pincode: <%= @address.pincode %></p>
+
+
+    <%= button_to 'Edit', edit_profile_path(@address.id), method: :get, class: "btn btn-success"  %>
+    <%= button_to 'Delete', profile_path(@address.id), method: :delete, class: "btn btn-danger"  %>
+
+</div>

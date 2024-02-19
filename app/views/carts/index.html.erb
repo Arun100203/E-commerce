@@ -1,0 +1,59 @@
+<div class="container">
+<style>
+  #btn{
+    width: 100%;
+  }
+</style>
+<h1> Cart </h1>
+<br>
+<p> Set your Personalized collection at your Cart</p>
+<br>
+<% if customerinfo_signed_in? %>
+    <% cart_count = @cart_items.count %>
+    <%= button_to "Buy all (#{cart_count})", buy_all_cart_path(current_customerinfo.id), method: :delete, class: "btn btn-warning", id: "btn"%>
+<% else %>
+    <div class="alert alert-warning" role="alert">
+      You need to sign in to see your cart
+    </div>
+<% end %>
+<br>
+<br>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<% if notice.present? %>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <%= notice %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% end %>
+<br>
+
+<div class="product-cards">
+<div class="container">
+  <div class="row">
+
+    <% if customerinfo_signed_in? %>
+      <% @cart_items.each do |cart| %>
+      
+      <div class="col-md-3 mb-4">
+        <% @product = Product.find(cart.product_id)%>
+        <button>
+          <%= link_to  @product do %>
+            <%= render @product %>
+          <% end %>
+        </button>
+        <%= button_to 'remove from Cart', remove_from_cart_cart_path(@product), method: :delete, class: "btn btn-warning mb-2", id: "btn" %>
+      </div>
+        
+      <% end %>
+    <%end %>
+  </div>
+</div>
+</div>
+</div>

@@ -1,0 +1,36 @@
+
+
+<article>
+     <div class="comment-box border p-3 mb-3">
+        <p><%= comment.body %></p>
+        <small class="text-muted d-block text-right">Posted by <%= Customerinfo.find_by(id: comment.customerinfo_id).name %> on <%= comment.created_at.strftime("%B %d, %Y") %></small>
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 order-2 order-md-1">
+              <% like_count = Like.where(likeable_type: "Comment", likeable_id: comment.id).count %>
+              <% if customerinfo_signed_in? %>
+                <% if current_customerinfo.likes? comment %>
+                    <%= button_to "Unlike (#{like_count})", unlike_comment_path(comment), method: :delete, class: "btn btn-primary"%>
+                <% else %>
+                    <%= button_to "Like (#{like_count})", likes_comment_path(comment), method: :post, class: "btn btn-light"%>
+                <% end %>
+              <% else %>
+                <%= button_to "Like (#{like_count})", likes_comment_path(comment), class: "btn btn-light"%>
+              <% end %>
+            </div>
+            <% if customerinfo_signed_in? %>
+              <% if current_customerinfo.id == comment.customerinfo_id%>
+              <div class="col-md-4 order-2 order-md-2">
+                <%= button_to "delete", delete_comment_comment_path(comment), method: :delete, class: "btn btn-danger", id: "btn" %>
+              </div>
+              <div class="col-md-4 order-2 order-md-3">
+                <%= button_to "edit", edit_comment_path(comment), method: :get, class: "btn btn-success", id: "btn" %>
+              </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+</article>
+

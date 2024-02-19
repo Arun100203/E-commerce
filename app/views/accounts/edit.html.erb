@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="flex no-wrap">
+    <h1> Hey <%= current_customerinfo.name %>  </h1>
+<%= form_for :account, url: account_path(params[:id]), method: :patch do |form| %>
+    <%= form.label :Account_no%>
+    <%= form.text_field :account_no, class: "form-control" %>
+<br>
+    <%= form.label :ifsc %>
+    <%= form.text_field :ifsc, class: "form-control" %>
+<br>
+    <%= form.label :bank_name %>
+    <%= form.text_field :bank_name, class: "form-control" %>
+<br>
+  <%= form.submit 'Update Account' %>
+<% end %>
+</div>
+</div>
