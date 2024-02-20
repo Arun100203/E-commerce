@@ -3,6 +3,10 @@ class CartsController < ApplicationController
     rescue_from Exception, with: :exception_handler
 
     def index
+        if current_customerinfo.nil?
+          redirect_to "/customerinfos/sign_in", notice: "Please login to view the cart."
+          return
+        end
         @cart_items = Cart.where(customerinfo_id: current_customerinfo.id)
     end
 
@@ -13,7 +17,7 @@ class CartsController < ApplicationController
     def create
         @cart = Cart.new(cart_params)
         if @cart.save
-          redirect_to carts_path, notice: "Successfully Purchased the product.#{cart_params}"
+          redirect_to carts_path, notice: "Successfully Purchased the product."
         else
           redirect_to carts_path, notice: "Error Occurred during purchase."
         end

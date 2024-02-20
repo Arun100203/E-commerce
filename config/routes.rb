@@ -67,6 +67,7 @@ Rails.application.routes.draw do
   end
   
   resources :profiles do
+    get '/profiles', to: 'profiles#index'
     post '/profiles', to: 'profiles#create' 
     delete :delete_address, to: 'profiles#destroy', on: :member
     member do

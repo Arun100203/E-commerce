@@ -3,31 +3,68 @@ require 'rails_helper'
 RSpec.describe Product, type: :request do
     context '/products' do
         let!(:product) { create(:product) }
+        let!(:token) {{
+            "grant_type": "password",
+            "email": "hello@example.com",
+            "password": "password",
+            "client_id": "63h4FRw0Rbs69nI6Gqy2pq8KD7QBUoO9PB1xSCja3oY",
+            "client_secret": "IwT4UZ_OzSc_Ijxt-gs23Nlc-ckFpFdCrtJBdVYhBrw"
+        }}
+        let!(:access_token) { "" }
+
         it 'GET will return all list of products' do
-            get 'api/v1/products'
+            post 'http://127.0.0.1:3000/oauth/token', params: token
+            access_token = JSON.parse(response.body)["access_token"]
+            get '/api/v1/products', headers: { "Authorization": "Bearer #{access_token}" }
             expect(response).to have_http_status(200)
         end
 
         it 'POST will create a new product' do
-            post 'api/v1/products', params: { product: attributes_for(:product) }
-            expect(response).to redirect_to(product_path(product.id+1))
-            expect(response).to have_http_status(302)
-            expect(flash[:notice]).to eq('Product was successfully created.')
+            post 'http://127.0.0.1:3000/oauth/token', params: token
+            access_token = JSON.parse(response.body)["access_token"]
+            post '/api/v1/products', params: { product: attributes_for(:product) }, headers: { "Authorization": "Bearer #{access_token}" }
+            expect(response).to have_http_status(200)
+            expect(response.body["name"]).to eq(product.to_json["name"])
+            expect(response.body["description"]).to eq(product.to_json["description"])
+            expect(response.body["price"]).to eq(product.to_json["price"])
+            expect(response.body["total_stock_amount"]).to eq(product.to_json["total_stock_amount"])
+            expect(response.body["seller_id"]).to eq(product.to_json["seller_id"])
+            expect(response.body["category_id"]).to eq(product.to_json["category_id"])
+            expect(response.body["type_id"]).to eq(product.to_json["type_id"])
         end
 
         it 'PUT will update a product' do
-            product = create(:product, name:"changed product name")
-            put "api/v1/products/#{product.id}", params: { product: attributes_for(:product) }
-            expect(response).to redirect_to(product_path(product.id))
-            expect(response).to have_http_status(302)
-            expect(flash[:notice]).to eq('Product was successfully updated.')
+            post 'http://127.0.0.1:3000/oauth/token', params: token
+            access_token = JSON.parse(response.body)["access_token"]
+            put "/api/v1/products/#{product.id}", params: { product: attributes_for(:product) }, headers: { "Authorization": "Bearer #{access_token}" }
+            expect(response).to have_http_status(200)
+            expect(response.body["name"]).to eq(product.to_json["name"])
+            expect(response.body["description"]).to eq(product.to_json["description"])
+            expect(response.body["price"]).to eq(product.to_json["price"])
+            expect(response.body["total_stock_amount"]).to eq(product.to_json["total_stock_amount"])
+            expect(response.body["seller_id"]).to eq(product.to_json["seller_id"])
+            expect(response.body["category_id"]).to eq(product.to_json["category_id"])
+            expect(response.body["type_id"]).to eq(product.to_json["type_id"])
         end
 
         it 'DELETE will delete a product' do
-            delete "api/v1/products/#{product.id}"
-            expect(response).to redirect_to(root_path)
-            expect(response).to have_http_status(302)
-            expect(flash[:notice]).to eq('Product was successfully deleted.')
+            post 'http://127.0.0.1:3000/oauth/token', params: token
+            access_token = JSON.parse(response.body)["access_token"]
+            delete "/api/v1/products/#{product.id}", headers: { "Authorization": "Bearer #{access_token}" }
+            expect(response).to have_http_status(200)
+            expect(response.body).to eq('Product was successfully deleted.')
+        end
+
+        it 'test the custom api controller' do
+            token = {
+                "grant_type": "client_credentials",
+                "client_id": "63h4FRw0Rbs69nI6Gqy2pq8KD7QBUoO9PB1xSCja3oY",
+                "client_secret": "IwT4UZ_OzSc_Ijxt-gs23Nlc-ckFpFdCrtJBdVYhBrw"
+            }
+            post 'http://127.0.0.1:3000/oauth/token', params: token
+            access_token = JSON.parse(response.body)["access_token"]
+            get '/api/v1/products/product_sold_count', headers: { "Authorization": "Bearer #{access_token}" }
+            expect(response).to have_http_status(200)
         end
     end
 end

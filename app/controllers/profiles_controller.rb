@@ -8,7 +8,6 @@ class ProfilesController < ApplicationController
     end
     
     def create
-        address_params[:customerinfo_id] = current_customerinfo.id
         @address = Address.new(address_params)
 
         if @address.save

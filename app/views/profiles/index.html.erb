@@ -6,6 +6,13 @@
     <br>
     <%= button_to "Accounts", accounts_path, method: :get, class: "btn btn-warning" %> 
     <br>
+<% if current_customerinfo.nil? %>
+    <div class="alert alert-warning" role="alert">
+      You have to sign in to see your addresses
+    </div>
+<% else %>
+<h2> Address </h2>
+    <br>
     <h1> Hey <%= current_customerinfo.name %>  </h1>
     
 <br>
@@ -32,22 +39,23 @@
 <% end %>
 </div>
 <br>
-  <h1> All your addresses </h1>
-  <br>
-  <% Address.where(customerinfo_id: current_customerinfo.id).each do |a|%>
-    <div class="flex">
-      <div>
-        <p>Door No: <%= a.door_no %></p>
-        <p>Street: <%= a.street %></p>
-        <p>State: <%= a.state %></p>
-        <p>Country: <%= a.country %></p>
-        <p>Pincode: <%= a.pincode %></p>
-      </div>
-      <div>
-        <%= link_to 'Show', profile_path(a.id), class: "btn btn-warning" %>
-        <br><br>
-      </div>
+    <h1> All your addresses </h1>
+    <br>
+    <% Address.where(customerinfo_id: current_customerinfo.id).each do |a|%>
+      <div class="flex">
+        <div>
+          <p>Door No: <%= a.door_no %></p>
+          <p>Street: <%= a.street %></p>
+          <p>State: <%= a.state %></p>
+          <p>Country: <%= a.country %></p>
+          <p>Pincode: <%= a.pincode %></p>
+        </div>
+        <div>
+          <%= link_to 'Show', profile_path(a.id), class: "btn btn-warning" %>
+          <br><br>
+        </div>
 
-    </div>
-    <% end %>
+      </div>
+      <% end %>
+  <% end %>
 </div>

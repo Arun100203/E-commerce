@@ -4,7 +4,7 @@ class Transaction < ApplicationRecord
     belongs_to :seller, class_name: 'Customerinfo', foreign_key: 'seller_id'
 
     after_save :send_transaction_email
-    validates_presence_of :amount, :date, :location, :product_id, :qty, :seller_id, :status
+    validates_presence_of :amount, :location, :product_id, :qty, :seller_id, :status, :customerinfo_id
 
     def send_transaction_email
         TransactionMailer.transaction_email(self).deliver_now

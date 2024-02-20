@@ -2,24 +2,30 @@
     <h1 class="text-success"> <%= notice %> </h1>
 
 <h1> Accounts </h1>
-<br>
-<%= form_for :account do |form| %>
-  <%= form.label :Account_no %>
-  <%= form.text_field :account_no, class: "form-control" %>
+ <% if current_customerinfo.nil? %>
+    <div class="alert alert-warning" role="alert">
+      You have to sign in to see your accounts
+    </div>
+ <% else %>
     <br>
-  <%= form.label :ifsc %>
-  <%= form.text_field :ifsc, class: "form-control" %>
+    <%= form_for :account do |form| %>
+      <%= form.label :Account_no %>
+      <%= form.text_field :account_no, class: "form-control" %>
+        <br>
+      <%= form.label :ifsc %>
+      <%= form.text_field :ifsc, class: "form-control" %>
+        <br>
+      <%= form.label :bank_name %>
+      <%= form.text_field :bank_name, class: "form-control" %>
     <br>
-  <%= form.label :bank_name %>
-  <%= form.text_field :bank_name, class: "form-control" %>
-<br>
-    <!-- change in future into current_customer -->
-  <%= form.hidden_field :customerinfo_id, value: current_customerinfo.id%>
+        <!-- change in future into current_customer -->
+      <%= form.hidden_field :customerinfo_id, value: current_customerinfo.id%>
+        <br>
+      <%= form.submit 'Create Account' %>
+    <% end %>
     <br>
-  <%= form.submit 'Create Account' %>
-<% end %>
-<br>
 
+ 
   <h1> All your accounts </h1>
   <br>
   <% Account.where(customerinfo_id: current_customerinfo.id).each do |a|%>
@@ -36,5 +42,6 @@
       </div>
     </div>
     <% end %>
+  <% end %>
 </div>
 </div>

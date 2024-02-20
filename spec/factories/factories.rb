@@ -12,7 +12,7 @@ FactoryBot.define do
         ifsc { "SBIN0000001" }
         account_no { 123456789 }
         bank_name { "SBI" }
-        customerinfo { association :customerinfo }
+        customerinfo_id { Customerinfo.last.id }
     end
 
     factory :address do
@@ -21,12 +21,12 @@ FactoryBot.define do
         state { "Tamil Nadu" }
         country { "India" }
         pincode { 600001 }
-        customerinfo { association :customerinfo }
+        customerinfo_id { Customerinfo.last.id }
     end
 
     factory :cart do
-        product_id { association :product }
-        customerinfo_id { association :customerinfo }
+        product_id { Product.last.id }
+        customerinfo_id { Customerinfo.last.id }
     end
 
     factory :category do
@@ -34,7 +34,10 @@ FactoryBot.define do
     end
 
     factory :like do
-        customerinfo { association :customer }
+        customerinfo { Customerinfo.last }
+        likeable_id { 1 }
+        likeable_type { "Product" }
+
         trait :comment do
             association :likeable, factory: :comment
         end
@@ -45,28 +48,43 @@ FactoryBot.define do
     end
 
     factory :transaction do
-        customerinfo { association :customerinfo }
-        product { association :product }
+        customerinfo { Customerinfo.last }
+        product { Product.last }
         qty { 1 }
         amount { 1 }
-        seller_id { association :customerinfo }
+        seller_id { Customerinfo.last.id.to_s }
         status { "MyString" }
         location { "MyString" }
-        account { association :account }
-        date { "2021-05-25" }
+        account_id { 1 }
+        date { Date.today }
     end
 
     factory :type do
         typeinfo { "shirt" }
     end
 
+    factory :comment do
+        body { "MyText" }
+        customerinfo_id { Customerinfo.last.id }
+        product_id { Product.last.id }
+    end
+
     factory :product do
         name { "MyString" }
         description { "MyText" }
         price { 1 }
+        brand { "MyString" }
         total_stock_amount { 1 }
         seller_id { "1" }
-        association :category 
-        association :type
+        category_id { Category.first.id }
+        type_id { Type.first.id }
     end
+end
+
+def factory_for_product_likeable
+    FactoryBot.create(:like, :product, likeable_id: Product.last.id, likeable_type: "Product")
+end
+
+def factory_for_comment_likeable
+    FactoryBot.create(:like, :comment, likeable_id: Comment.last.id, likeable_type: "Comment")
 end
