@@ -5,6 +5,7 @@ RSpec.describe Customerinfo, type: :model do
  
   let(:customer1) { create(:customerinfo, email:"arunl.a@gmail.com", name:"Test", phone_number:1234567890, password:"123456")}
   let(:customer) { build(:customerinfo, email:"email@gmail.com") }
+  let(:product) { create(:product) }
   
   context 'Checking Validations' do
 
@@ -39,8 +40,8 @@ RSpec.describe Customerinfo, type: :model do
     end
 
     it 'Checking likes method with correct object' do
-      like = Like.create!(likeable_id: 1, likeable_type: "Product", customerinfo_id: customer1.id)
-      expect(customer1.likes?(Product.find(1))).to eq(true)
+      like = Like.create!(likeable: product, customerinfo_id: customer1.id)
+      expect(customer1.likes?(product.id)).to eq(true)
     end
 
     it 'Checking authenticate method' do

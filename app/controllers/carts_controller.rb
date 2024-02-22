@@ -37,6 +37,11 @@ class CartsController < ApplicationController
     def buy_all
 
         cart_items = Cart.where(customerinfo_id: current_customerinfo.id)
+        if cart_items.empty?
+          redirect_to carts_path, notice: "No products in the cart to buy."
+          return
+        end
+        
         account = Account.find_by(customerinfo_id: current_customerinfo.id)
         address = Address.find_by(customerinfo_id: current_customerinfo.id)
 
@@ -50,9 +55,9 @@ class CartsController < ApplicationController
         # for each product in the cart, create a transaction
         cart_count = 1
         cart_items.each do |cart_item|
-          @product = Product.find_by(cart_item.product_id)
+          @product = Product.find_by(id: cart_item.product_id)
           Transaction.create(customerinfo_id: current_customerinfo.id, product_id: @product.id, amount: @product.price, qty: cart_count, status: "Success", location: location, seller_id: @product.seller_id, account_id: account.id, date: Time.now.strftime("%d/%m/%Y %H:%M"))
-          Product.find_by(@product.id).update(total_stock_amount: @product.total_stock_amount - 1, category_id:@product.category_id, type_id: @product.type_id)
+          Product.find_by(id: @product.id).update(total_stock_amount: @product.total_stock_amount - 1, category_id:@product.category_id, type_id: @product.type_id)
         end
 
         # delete all the products from the cart

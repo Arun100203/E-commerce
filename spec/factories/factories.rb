@@ -35,8 +35,7 @@ FactoryBot.define do
 
     factory :like do
         customerinfo { Customerinfo.last }
-        likeable_id { 1 }
-        likeable_type { "Product" }
+        likeable { Product.last }
 
         trait :comment do
             association :likeable, factory: :comment
@@ -75,7 +74,7 @@ FactoryBot.define do
         price { 1 }
         brand { "MyString" }
         total_stock_amount { 1 }
-        seller_id { "1" }
+        seller_id { Customerinfo.last.id.to_s }
         category_id { Category.first.id }
         type_id { Type.first.id }
     end

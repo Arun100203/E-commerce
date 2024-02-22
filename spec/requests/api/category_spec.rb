@@ -7,8 +7,8 @@ RSpec.describe Category, type: :request do
             "grant_type": "password",
             "email": "hello@example.com",
             "password": "password",
-            "client_id": "63h4FRw0Rbs69nI6Gqy2pq8KD7QBUoO9PB1xSCja3oY",
-            "client_secret": "IwT4UZ_OzSc_Ijxt-gs23Nlc-ckFpFdCrtJBdVYhBrw"
+            "client_id": "J7dWYDkOS_lots4BBHl6m_kcSO3nUnfj9BQg8yjedeE",
+            "client_secret": "uD4UGfTmmJM14cRRUUIVajA4Ic53R4rE1b2UcC1sUv0"
         }}
         let!(:access_token) { "" }
 

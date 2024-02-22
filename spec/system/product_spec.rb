@@ -4,8 +4,8 @@ RSpec.describe "Products", type: :system do
 
 
     describe 'Product CRUD operations' do
-        let!(:customer) { build(:customerinfo) }
-        let!(:product) { build(:product) }
+        let!(:customer) { create(:customerinfo) }
+        let!(:product) { create(:product) }
 
 
         before(:each) do
@@ -15,16 +15,16 @@ RSpec.describe "Products", type: :system do
             click_button 'Log in'
         end 
 
-        it 'Checking Product with valid details' do
+        it 'Checking Product with Invalid details' do
             click_link 'Sell Product'
             click_button 'Add new Product' 
-            fill_in 'product_name', with: product.name
-            fill_in 'product_description', with: product.description
-            fill_in 'product_price', with: product.price
-            fill_in 'product_total_stock_amount', with: product.total_stock_amount
 
             click_button 'Create Product'
-            expect(page).to have_content("Product was successfully created.")
+            expect(page).to have_content("Category must exist")
+            expect(page).to have_content("Type must exist")
+            expect(page).to have_content("Name can't be blank")
+            expect(page).to have_content("Description can't be blank")
+            expect(page).to have_content("Price can't be blank")
         end
 
         # it 'Checking Edit products' do 

@@ -40,7 +40,6 @@
 
 <br>
 <h2 class="text-success"> <%= notice %> </h2>
-
 <div class="container-fluid h-100">
   <div class="row h-100">
     <main class="col-md-5">
@@ -52,11 +51,7 @@
                 <%= image_tag @product.image, class: "image" %> 
             <% else %>
                 <p>No image available</p>
-            <% end %>
-            
-
-            
-            
+            <% end %>     
         </div>
       </div>
     </main>
@@ -107,13 +102,6 @@
 
         <% if customerinfo_signed_in? %>
             <% unless @product.seller_id.to_i == current_customerinfo.id%>
-
-            <!--  
-
-            if Cart.where(customer_id: current_customer.id).pluck(:product_id).include?(product.id)
-                  cart products
-            -->
-
               <% if (Cart.where(customerinfo_id: current_customerinfo.id).pluck(:product_id)).include?(@product.id) %>
               
                   <%= button_to 'remove from Cart', remove_from_cart_cart_path(@product), method: :delete, class: "btn btn-warning mb-2", id: "btn" %>

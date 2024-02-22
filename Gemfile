@@ -74,6 +74,7 @@ gem 'sassc-rails'
 
 gem "doorkeeper", "~> 5.6"
 
+gem 'byebug'
 group :development, :test do
   gem 'rspec-rails', '~> 6.1.0'
   gem 'factory_bot_rails'

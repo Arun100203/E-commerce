@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Customerinfos", type: :system do
     describe 'Customerinfo sign up' do
-        let(:customer) { build(:customerinfo) }
+        let(:customer) { create(:customerinfo) }
 
         it 'Checking Customerinfo with empty values' do
             visit '/customerinfos/sign_up'
@@ -29,7 +29,7 @@ RSpec.describe "Customerinfos", type: :system do
     end
 
     describe 'Customerinfo sign up' do
-        let(:customer) { build(:customerinfo) }
+        let(:customer) { create(:customerinfo) }
 
         before(:each) do
             visit '/customerinfos/sign_in'

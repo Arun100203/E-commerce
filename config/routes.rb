@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  
-  
 
   use_doorkeeper 
   # do
@@ -26,7 +24,6 @@ Rails.application.routes.draw do
 
   get "/transactions", to: "transactions#index"
 
-  
   get "/about", to: "about#index"
 
   get "/faq", to: "faq#index"
@@ -67,20 +64,11 @@ Rails.application.routes.draw do
   end
   
   resources :profiles do
-    get '/profiles', to: 'profiles#index'
-    post '/profiles', to: 'profiles#create' 
     delete :delete_address, to: 'profiles#destroy', on: :member
-    member do
-      get 'edit'
-    end
   end
 
   resources :accounts do
-    post '/accounts', to: 'accounts#create' 
     delete :delete_account, to: 'accounts#destroy', on: :member
-    member do
-      get 'edit'
-    end
   end
 
   resources :home 
@@ -99,7 +87,6 @@ Rails.application.routes.draw do
       resources :customs, only: [:show, :index, :create, :update, :destroy] 
     end
   end
-
 
   match '*path', to: 'application#exception_handler', constraints: ->(req) { req.path.exclude?('/rails/active_storage') }, via: [:all]
 
