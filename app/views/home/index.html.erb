@@ -2,6 +2,11 @@
   .product-cards {
    padding-top:40px;
   }
+  .scrollable-row {
+      overflow-x: auto;
+      flex-wrap : nowrap;
+      width : 100%;
+    }
 </style>
 
 
@@ -16,10 +21,16 @@
     <div class="carousel-item">
       <%= image_tag(asset_path("carsoul_2.jpg"), alt: "Example Image", class: "d-block w-100 h-20") %>
     </div>
+    <div class="carousel-item">
+      <%= image_tag(asset_path("carsoul_4.jpg"), alt: "Example Image", class: "d-block w-100 h-20") %>
+    </div>
+    <div class="carousel-item">
+      <%= image_tag(asset_path("carsoul_5.jpg"), alt: "Example Image", class: "d-block w-100 h-20") %>
+    </div>
   </div>
 </div>
 <div class="product-cards">
-<div class="container">
+  <div class="container">
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
@@ -36,36 +47,105 @@
     </button>
   </div>
 <% end %>
-
-      
+  </div>
 </div>
 
 
 <div class="container">
   <div class="search results">
         <h2 id="text-1"></h2>
-        <br>
-        <h4 id="text-2"></h4>
-        <br>
-          <div class="row" style="overflow: auto;">
-          </div>
-          <br>
-    </div>
-<h2> Purchase Products </h2>
-<div class="row">
-    <% @products.each do |product| %>
-    
-    <div class="col-md-3 mb-4">
-      <button class="container">
-      <%= link_to  product do %>
-      <%= render product%>
-      <% end %>
-      </button>
-      <br>
-      <br>
-      <br>
-    </div>
       
-    <% end %>
+        <h4 id="text-2"></h4>
+        
+        <div class="row" style="display: flex;">
+        </div>
+        
+    </div>
+</div>
+
+<br>
+
+<div class="container">
+  <h2> Purchase Products </h2>
+  <br>
+  <div class="row">
+      <% @frequently_sold_products_1.each do |product| %>
+      <div class="col-md-3 mb-4">
+        <button class="container">
+        <%= link_to  product do %>
+        <%= render product%>
+        <% end %>
+        </button>
+        <br>
+      </div>
+      <% end %>
   </div>
+
+
+<div class="container">
+  <br>
+  <h2> Gadgets </h2>
+  <br>
+  <div class="row">
+    <div class="container">
+      <div class="row scrollable-row">
+        <% @gadgets.each do |product| %>
+        <div class="col mb-4">
+          <button class="container">
+          <%= link_to  product do %>
+          <%= render product%>
+          <% end %>
+          </button>
+          <br>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<br>
+
+<div class="container">
+  <br>
+  <h2> Weekend sale </h2>
+  <br>
+  <div class="row">
+        <% @frequently_sold_products_2.each do |product| %>
+        <div class="col-md-3 mb-4">
+          <button class="container">
+          <%= link_to  product do %>
+          <%= render product%>
+          <% end %>
+          </button>
+          <br>
+        </div>
+        <% end %>
+  </div>
+</div>
+
+<div class="container">
+  <br>
+  <h2> Beauty </h2>
+  <br>
+  <div class="row">
+    <div class="container">
+      <div class="row scrollable-row">
+        <% @beauty_products.each do |product| %>
+        <div class="col mb-4">
+          <button class="container">
+          <%= link_to  product do %>
+          <%= render product%>
+          <% end %>
+          </button>
+          <br>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 </div>

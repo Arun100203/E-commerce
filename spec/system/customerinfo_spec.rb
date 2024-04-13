@@ -17,7 +17,7 @@ RSpec.describe "Customerinfos", type: :system do
 
         it 'Checking Customerinfo with valid form' do
             visit '/customerinfos/sign_up'
-            fill_in 'customerinfo_email', with: "email123@gmail.com"
+            fill_in 'customerinfo_email', with: "email1234@gmail.com"
             fill_in 'customerinfo_password', with: customer.password
             fill_in 'customerinfo_password_confirmation', with: customer.password
             fill_in 'customerinfo_name', with: customer.name

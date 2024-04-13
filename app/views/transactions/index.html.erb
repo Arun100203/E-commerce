@@ -1,4 +1,5 @@
 <div class="container">
+    <br>
     <h1> Previous Transactions </h1>
     <br>
     <br>
@@ -16,12 +17,14 @@
                         <% transactions.each_with_index do |transaction, index| %>
                             <div class="col-md-3 mb-4">
                                 <div class="container">
-                                    <h3> <strong> Transaction <%= index + 1 %> </strong> </h3>
+                                    <h4> <strong> Transaction <%= index + 1 %> </strong> </h4>
                                     <div class="card">
                                         <div class="card-body">
                                             <h5 class="card-title"><%= transaction.product.name %></h5>
-                                            <p class="card-text">Price: <%= transaction.product.price %></p>
-                                            <p class="card-text">Seller name: <%= Customerinfo.find(transaction.seller_id).name %></p>
+                                            <p class="card-text">Price: $ <%= transaction.product.price %>
+                                            <br>
+                                            Seller name: <%= Customerinfo.find_by(id: transaction.seller_id).name %> </p>
+                                            <small class="text-muted"><%= transaction.created_at.strftime("%B %d, %Y") %> </small>
                                         </div>
                                     </div>
                                 </div>

@@ -4,24 +4,49 @@
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <%= link_to(root_path, class: "nav-link px-2 text-secondary") do %>
+              Home <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                      <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/>
+                   </svg>
+            <% end %>
+            
+            <%= link_to(carts_path, class: "nav-link px-2 text-secondary") do %>
+              Cart <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                      <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                   </svg>
+            <% end %>
           
-            <%= link_to "Home", root_path, class: "nav-link px-2 text-secondary"%>
+            <%= link_to(products_path, class: "nav-link px-2 text-secondary") do %>
+              Sell Product <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cursor-fill" viewBox="0 0 16 16">
+                              <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z"/>
+                           </svg>
+            <% end %>
           
-            <%= link_to "Cart", carts_path, class: "nav-link px-2 text-secondary" %>
+            <%= link_to(about_path, class: "nav-link px-2 text-secondary") do %>
+              About <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                      <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                    </svg>
+            <% end %>
           
-            <%= link_to "Sell Product", products_path, class: "nav-link px-2 text-secondary" %>
-          
-            <%= link_to "About", about_path, class: "nav-link px-2 text-secondary" %>
-          
-            <%= link_to "FAQ", faq_path, class: "nav-link px-2 text-secondary" %>
+            <%= link_to(faq_path, class: "nav-link px-2 text-secondary") do %>
+              FAQ <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247m2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"/>
+                  </svg>
+            <% end %>
 
-            <%= link_to "Transaction History", transactions_path, class: "nav-link px-2 text-secondary" %>
+            <%= link_to(transactions_path, class: "nav-link px-2 text-secondary") do %>
+              Transaction History <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z"/>
+                                    <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466"/>
+                                  </svg>
+            <% end %>
 
             <!-- <%= link_to "Sell Products", selling_path, class: "nav-link px-2 text-secondary" %> -->
         </ul>
 
        
-          <input type="search" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" placeholder="Search..." id="myInput" onkeyup="myFunction()" aria-label="Search">
+          <input type="search" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" placeholder="Search Product..." id="myInput" onkeyup="myFunction()" aria-label="Search">
         
 
         <div class="d-flex justify-content-end">
@@ -43,17 +68,86 @@
   <script>
     
     document.getElementById('myInput').addEventListener('keyup', myFunction);
+
     async function myFunction() {
       if(event.key == "Enter" || event.keyCode == 13) {
         // for showing search results when the enter key is pressed.
         let searchText = document.getElementById('text-1');
         let searchText2 = document.getElementById('text-2');
         let userInput = document.getElementById('myInput').value; 
+        let wrapper = document.querySelector('.row');
+
         if(userInput == "") {
           searchText2.innerHTML = "Please enter a valid search query";
           return;
         }
         searchText.innerHTML = `Search Results for ${userInput}`;
+
+       while (wrapper.firstChild) {
+            wrapper.removeChild(wrapper.firstChild);
+        }
+        
+       var div = document.createElement("div");
+       div.style.display = "flex";
+       div.className = "row";
+
+        // Set the innerHTML of the div to the provided HTML content
+        div.innerHTML = `
+          <div class="card col-md-3 mb-4 mr-2" aria-hidden="true">
+            <img src="https://wallpapercave.com/wp/wp3429906.png" class="card-img-top" alt="..." width="230" height="270">
+            <div class="card-body">
+              <h5 class="card-title placeholder-glow">
+                <span class="placeholder col-6"></span>
+              </h5>
+              <p class="card-text placeholder-glow">
+                <span class="placeholder col-7"></span>
+                <span class="placeholder col-4"></span>
+              </p>
+            </div>
+          </div>
+          <div class="card col-md-3 mb-4 mr-2" aria-hidden="true">
+            <img src="https://wallpapercave.com/wp/wp3429906.png" class="card-img-top" alt="..." width="230" height="270">
+            <div class="card-body">
+              <h5 class="card-title placeholder-glow">
+                <span class="placeholder col-6"></span>
+              </h5>
+              <p class="card-text placeholder-glow">
+                <span class="placeholder col-7"></span>
+                <span class="placeholder col-4"></span>
+              </p>
+            </div>
+          </div>
+          <div class="card col-md-3 mb-4 mr-2" aria-hidden="true">
+            <img src="https://wallpapercave.com/wp/wp3429906.png" class="card-img-top" alt="..." width="230" height="270">
+            <div class="card-body">
+              <h5 class="card-title placeholder-glow">
+                <span class="placeholder col-6"></span>
+              </h5>
+              <p class="card-text placeholder-glow">
+                <span class="placeholder col-7"></span>
+                <span class="placeholder col-4"></span>
+              </p>
+            </div>
+          </div>
+          <div class="card col-md-3 mb-4 mr-2" aria-hidden="true">
+            <img src="https://wallpapercave.com/wp/wp3429906.png" class="card-img-top" alt="..." width="230" height="270">
+            <div class="card-body">
+              <h5 class="card-title placeholder-glow">
+                <span class="placeholder col-6"></span>
+              </h5>
+              <p class="card-text placeholder-glow">
+                <span class="placeholder col-7"></span>
+                <span class="placeholder col-4"></span>
+              </p>
+            </div>
+          </div>
+        `;
+
+       
+        // Append the div to the wrapper
+        wrapper.appendChild(div);
+        
+
         console.log(userInput.toUpperCase());
         // for authentication
         let requestBody = {
@@ -88,21 +182,25 @@
           console.log(result);
           if (result.length == 0) {   
             searchText2.innerHTML = "No products found";
+            while (wrapper.firstChild) {
+                wrapper.removeChild(wrapper.firstChild);
+            }
+            return;
           } else {
           searchText2.innerHTML = "Here are the products that match your search";
           }
-          let wrapper = document.querySelector('.row');
+          
           wrapper.innerHTML = result.map((product, index) => {
             return `<div class="col-md-3 mb-4">
                       <button class="container" onclick="fun(${product.id})">
                           <h5 class="card-title">${product.name}</h5>
-                          <img src="https://picsum.photos/130/170?random=${index+1}" class="card-img-top" alt="no image available">
-                          <p class="card-text">Price: ${product.price}</p>
+                          <img src="${product.image_url}" class="card-img-top" alt="no image available" width="230" height="270">
+                          <p class="card-text"><strong> Price: </strong> $ ${product.price}</p>
                       </button>
                     </div>`;
           }).join('');
         });    
-        }                              
+        }                             
       }
 
       function fun(ProductId) {

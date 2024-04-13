@@ -43,7 +43,7 @@
       
       <div class="col-md-3 mb-4">
         <% @product = Product.find(cart.product_id)%>
-        <button>
+        <button class="container">
           <%= link_to  @product do %>
             <%= render @product %>
           <% end %>

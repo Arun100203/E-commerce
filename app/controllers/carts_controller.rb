@@ -41,7 +41,7 @@ class CartsController < ApplicationController
           redirect_to carts_path, notice: "No products in the cart to buy."
           return
         end
-        
+
         account = Account.find_by(customerinfo_id: current_customerinfo.id)
         address = Address.find_by(customerinfo_id: current_customerinfo.id)
 

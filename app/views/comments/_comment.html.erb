@@ -11,12 +11,31 @@
               <% like_count = Like.where(likeable_type: "Comment", likeable_id: comment.id).count %>
               <% if customerinfo_signed_in? %>
                 <% if current_customerinfo.likes? comment %>
-                    <%= button_to "Unlike (#{like_count})", unlike_comment_path(comment), method: :delete, class: "btn btn-primary"%>
+                    <%= button_to(unlike_comment_path(comment), method: :delete, class: "btn btn-primary") do %>
+                    Unlike <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill btn-primary" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+                            <text x="50%" y="70%" text-anchor="middle" fill="blue" font-size="8pt"> <%= like_count %></text>
+                          </svg>
+                    <% end %>
                 <% else %>
-                    <%= button_to "Like (#{like_count})", likes_comment_path(comment), method: :post, class: "btn btn-light"%>
+                    <%= button_to(likes_comment_path(comment), method: :post, class: "btn btn-light") do %>
+                     Like <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                            <% if like_count > 0 %>
+                              <text x="50%" y="70%" text-anchor="middle" fill="black" font-size="8pt"> <%= like_count %></text>
+                            <% end %>
+                          </svg>
+                    <% end %>
                 <% end %>
               <% else %>
-                <%= button_to "Like (#{like_count})", likes_comment_path(comment), class: "btn btn-light"%>
+                <%= button_to(likes_comment_path(comment), class: "btn btn-light") do %>
+                 Like <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                        <% if like_count > 0 %>
+                          <text x="50%" y="70%" text-anchor="middle" fill="black" font-size="8pt"> <%= like_count %></text>
+                        <% end %>
+                      </svg>
+                <% end %>
               <% end %>
             </div>
             <% if customerinfo_signed_in? %>

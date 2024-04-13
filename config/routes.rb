@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  devise_for :customerinfos, controllers: {registrations: 'customerinfo/registrations'}, views: {sessions: "customerinfo/sessions"}
+  devise_for :customerinfos, controllers: {registrations: 'customerinfo/registrations'}
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root "home#index"
@@ -41,13 +41,11 @@ Rails.application.routes.draw do
   get "/accounts", to: "accounts#index"
 
   resources :products do
-    post 'add_to_cart', on: :member
-    post 'likes', on: :member, to: 'likes#create'
-    delete 'unlike', on: :member
-    delete :delete_comment, on: :member
     member do
       post 'add_to_cart'
-      get "edit"
+      post 'likes', to: 'likes#create'
+      delete 'unlike'
+      delete :delete_comment
     end
   end
   
@@ -79,6 +77,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get "/products/product_sold_count", to: "products#product_sold_count"
+      get "/products/most_active_customer", to: "products#most_active_customer"
+      get "/products/most_liked_product", to: "products#most_liked_product"
       resources :products, only: [:index, :show, :create, :update, :destroy]
       resources :carts, only: [:index, :show, :create, :update, :destroy]
       resources :transactions, only: [:index, :show, :create, :update, :destroy]
@@ -88,6 +88,6 @@ Rails.application.routes.draw do
     end
   end
 
-  match '*path', to: 'application#exception_handler', constraints: ->(req) { req.path.exclude?('/rails/active_storage') }, via: [:all]
+  # match '*path', to: 'application#exception_handler', constraints: ->(req) { req.path.exclude?('/rails/active_storage') }, via: [:all]
 
 end

@@ -26,9 +26,8 @@
         <div class="card-body">
             <h5 class="card-title"><%= product.name %></h5>
             <% if product.image.attached? %>
-                <%= image_tag product.image, class: "image" %> <!-- Assuming you have a method like "url" in your Image model -->
+                <img src="<%= url_for(product.image)%>" width="230" height="270">
             <% else %>
-                <!-- Handle the case where there is no image -->
                 <p>No image available</p>
             <% end %>
             <p class="card-text"><strong>Price:</strong> <%= number_to_currency(product.price) %></p>
