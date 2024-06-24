@@ -1,0 +1,23 @@
+databases:
+  - name: mysite
+    databaseName: online_shopping_system
+    user: arun
+    plan: free
+
+services:
+  - type: web
+    name: mysite
+    runtime: ruby
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    # preDeployCommand: "bundle exec rails db:migrate" # preDeployCommand only available on paid instance types
+    startCommand: "bundle exec rails server"
+    envVars:
+      - key: postgresql://arun:Test%40123@online_shopping_system:5432/e_commerce
+        fromDatabase:
+          name: mysite
+          property: connectionString
+      - key: <%= ENV['RAILS_MASTER_KEY'] =>
+        sync: false
+      - key: 2
+        value: 2 # sensible default
