@@ -1,7 +1,7 @@
 databases:
   - name: mysite
-    databaseName: online_shopping_system
-    user: arun
+    databaseName: mysite
+    user: mysite
     plan: free
 
 services:
