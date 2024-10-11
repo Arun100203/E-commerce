@@ -33,6 +33,10 @@ FactoryBot.define do
         category { "Silk"}
     end
 
+    factory :category_1 , as "Category" do
+        category { "Nylon"}
+    end
+
     factory :like do
         customerinfo { Customerinfo.last }
         likeable { Product.last }
