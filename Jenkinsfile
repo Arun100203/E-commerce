@@ -3,7 +3,20 @@ pipeline {
     stages {
         stage('Stage 1') {
             steps {
-                echo 'Hello world!'
+                echo 'Build start'
+            }
+        }
+
+        stage('Stage 2 - Rspec'){
+            steps{
+                echo 'Rspec begin'
+            }
+            steps{
+                 script {
+                    container('arun-rspec') {
+                        sh "rspec"
+                    }
+                }
             }
         }
     }
