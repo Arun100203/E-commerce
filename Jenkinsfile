@@ -5,19 +5,23 @@ pipeline {
             steps {
                 echo 'Build start'
             }
-        }
 
-        stage('Stage 2 - Rspec'){
-            steps{
-                echo 'Rspec begin'
-            }
-            steps{
-                 script {
-                    container('arun-rspec') {
-                        sh "rspec"
+            stages{
+                        stage('Stage 2 - Rspec'){
+                    steps{
+                        echo 'Rspec begin'
+                    }
+                    steps{
+                         script {
+                            container('arun-rspec') {
+                                sh "rspec"
+                            }
+                        }
                     }
                 }
-            }
+                    }
         }
+
+        
     }
 }
