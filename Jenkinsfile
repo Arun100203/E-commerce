@@ -6,18 +6,20 @@ pipeline {
                 echo 'Build start'
             }
         }
-        stage('Rspec'){
-            steps{
+        stage('Rspec') {
+            steps {
                 echo 'Rspec begin'
             }
-            stages{
-                stage('Paralle test'){
-                    steps{
-                     
-                            echo 'if docker enabled then we can check this stage'
-                        
-                    }
-                }
+        }
+        stage('Parallel Test') {
+            // when {
+            //     expression { // Replace with your condition for checking Docker
+            //         // Example condition for demonstration:
+            //         fileExists('/usr/bin/docker')
+            //     }
+            // }
+            steps {
+                echo 'If Docker is enabled, this stage will execute'
             }
         }
     }
