@@ -13,9 +13,9 @@ pipeline {
             stages{
                 stage('Paralle test'){
                     steps{
-                        script{
+                     
                             echo 'if docker enabled then we can check this stage'
-                        }
+                        
                     }
                 }
             }
