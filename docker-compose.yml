@@ -1,27 +1,23 @@
-version: '3.8'
+# Use an official Ruby image as the base
+FROM ruby:3.2
 
-services:
-  web:
-    build: .
-    ports:
-      - "3000:3000"
-    volumes:
-      - ".:/app"
-    environment:
-      - DATABASE_URL=postgresql://postgres:password@db:5432/online_shopping_system
-    depends_on:
-      - db
+# Install dependencies
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 
-  db:
-    image: postgres:14
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: online_shopping_system
-    ports:
-      - "5432:5432"
-    volumes:
-      - db_data:/var/lib/postgresql/data
+# Set working directory
+WORKDIR /app
 
-volumes:
-  db_data:
+# Copy Gemfile and Gemfile.lock
+COPY Gemfile Gemfile.lock ./
+
+# Install gems
+RUN bundle install
+
+# Copy the rest of the app
+COPY . .
+
+# Expose port 3000 for Rails server
+EXPOSE 3000
+
+# Start the Rails server
+CMD ["rails", "server", "-b", "0.0.0.0"]
