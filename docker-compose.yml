@@ -1,69 +1,27 @@
-# # version: '2.2'
-# services:
-#   db:
-#     image: postgres:14.2-alpine
-#     container_name: db
-#     volumes:
-#       - postgres_data:/var/lib/postgresql/data
-#     command:
-#       "postgres -c 'max_connections=500'"
-#     environment:
-#       - POSTGRES_DB=${POSTGRES_DB}
-#       - POSTGRES_USER=${POSTGRES_USER}
-#       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-#     ports:
-#       - "5432:5432"
-
-#   commerce-web:
-#     build: "./bin/rails server"
-#     environment:
-#       - RAILS_ENV=${RAILS_ENV}
-#       - POSTGRES_HOST=${POSTGRES_HOST}
-#       - POSTGRES_DB=${POSTGRES_DB}
-#       - POSTGRES_USER=${POSTGRES_USER}
-#       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-#     volumes:
-#       - app-storage:/rails/storage
-#     depends-on:
-#       - db
-
-# volumes:
-#   postgres_data: {}
-#   app-storage: {}
-
-version: '2.2'
+version: '3.8'
 
 services:
-  db:
-    image: postgres:14.2-alpine
-    container_name: db
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    ports:
-      - "5432:5432"
-
-  commerce-web:
-    build:
-      context: ./bin     # Specify the build context directory for your Rails app
-      dockerfile: ../Dockerfile
-    command: ["rails", "server"]
-    environment:
-      RAILS_ENV: ${RAILS_ENV}
-      POSTGRES_HOST: ${POSTGRES_HOST}
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    volumes:
-      - app-storage:/rails/storage
-    depends_on:
-      - db
+  web:
+    build: .
     ports:
       - "3000:3000"
+    volumes:
+      - ".:/app"
+    environment:
+      - DATABASE_URL=postgresql://postgres:password@db:5432/online_shopping_system
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: online_shopping_system
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
 
 volumes:
-  postgres_data:
-  app-storage:
+  db_data:
