@@ -5,13 +5,16 @@ default: &default
   timeout: 5000
   encoding: unicode
   port: 5432
+  host: db
+  username: postgres
+  password: password
 
 development:
   <<: *default
   database: online_shopping_system
+  host: db
   username: postgres
-  password: 123456
-  host: localhost
+  password: password
   port: 5432
 
 # development:
@@ -25,15 +28,15 @@ development:
 test:
   <<: *default
   database: online_shopping_system_test
-  username: <%= ENV['POSTGRES_USER'] %>
-  password: <%= ENV['POSTGRES_PASSWORD'] %>
-  host: <%= ENV['POSTGRES_HOST'] %>
+  host: db
+  username: postgres
+  password: password
   port: 5432
 
 production:
   <<: *default
-  database: <%= ENV['POSTGRES_DB'] %>
-  username: <%= ENV['POSTGRES_USER'] %>
-  password: <%= ENV['POSTGRES_PASSWORD'] %>
-  host: <%= ENV['POSTGRES_HOST'] %>
+  database: online_shopping_system_production
+  host: db
+  username: postgres
+  password: password
   port: 5432
