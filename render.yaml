@@ -13,7 +13,7 @@ services:
     # preDeployCommand: "bundle exec rails db:migrate" # preDeployCommand only available on paid instance types
     startCommand: "bundle exec rails server"
     envVars:
-      - key: postgresql://arun:Test%40123@online_shopping_system:5432/e_commerce
+      - key: postgres://postgres:123456@localhost:5432/online_shopping_system
         fromDatabase:
           name: mysite
           property: connectionString
