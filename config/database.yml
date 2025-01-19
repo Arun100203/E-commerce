@@ -35,7 +35,7 @@ test:
 
 production:
   <<: *default
-  database: online_shopping_system_production
+  database: online_shopping_system
   host: db
   username: postgres
   password: password

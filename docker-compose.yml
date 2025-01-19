@@ -8,7 +8,7 @@ services:
     volumes:
       - ".:/app"
     environment:
-      - DATABASE_URL=postgresql://postgres:password@db:5432/online_shopping_system
+      - DATABASE_URL=${{ mysite-6yvA.DATABASE_URL }}
       - RAILS_MASTER_KEY=b2c98438f933b7eee93e93f01b18d4f3
     depends_on:
       - db
